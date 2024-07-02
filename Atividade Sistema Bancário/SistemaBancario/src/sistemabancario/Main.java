@@ -1,5 +1,6 @@
 package sistemabancario;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import sistemabancario.conta.ContaCorrente;
@@ -19,6 +20,8 @@ public class Main {
 		double saldo = 0;
 		int opcao = 0;
 
+		try {
+		
 		// Criando o objeto cliente, contendo dados referente ao cliente e suas contas;
 		Cliente cliente = criarUsuario(scanner);
 
@@ -126,6 +129,12 @@ public class Main {
 		// Fechamento do Scanner;
 		scanner.close();
 
+		} catch(InputMismatchException ex) {
+			System.out.println("A aplicação recebeu um valor inválido para a váriavel opção");
+		
+		} catch(Exception ex) {
+			System.out.println("A aplicação parou por conta de um erro! Erro: " + ex.getMessage());
+		}
 	}
 
 	/**
@@ -135,7 +144,7 @@ public class Main {
 	 *                de dados via console
 	 * @return - Retorna o valor da opção escolhida pelo usuário
 	 */
-	public static int criarConta(Scanner scanner) {
+	public static int criarConta(Scanner scanner) throws Exception {
 		// Variável para pegar a opção que o usuário quer;
 		int opcao = 0;
 
@@ -158,7 +167,7 @@ public class Main {
 	 *                de dados via console
 	 * @return - Retorna um novo cliente, que será criado no método Main (linha 23)
 	 */
-	public static Cliente criarUsuario(Scanner scanner) {
+	public static Cliente criarUsuario(Scanner scanner) throws Exception{
 		// Variáveis para pegar os dados do cliente;
 		String nome, endereco;
 		int idade;
@@ -195,7 +204,7 @@ public class Main {
 	 * @return - Retorna o valor do saldo informado ou não pelo usuário. Obs: Esse
 	 *         valor é colocando diretamente no construtor.
 	 */
-	public static double primeiroDeposito(double saldo, Scanner scanner) {
+	public static double primeiroDeposito(double saldo, Scanner scanner) throws Exception{
 		// Variável para pegar a opção que o usuário quer;
 		int opcao;
 
@@ -235,7 +244,7 @@ public class Main {
 	 * @return - Retorna o valor que o usuário escolheu para realizar as operações
 	 *         nos próximos métodos;
 	 */
-	public static double pegarValor(Scanner scanner) {
+	public static double pegarValor(Scanner scanner) throws Exception{
 		// Criando a variável que o usuário poderá escolher um valor;
 		double valor;
 
@@ -269,7 +278,7 @@ public class Main {
 	 *         Loop até que o usuário pare.
 	 */
 	public static ContaPoupanca operacoesContaPoupanca(ContaPoupanca conta, ContaCorrente conta2, Scanner scanner,
-			int opcao) {
+			int opcao) throws Exception{
 		while (true) {
 			// Pegando a opção;
 			do {
@@ -319,7 +328,7 @@ public class Main {
 	 *         Loop até que o usuário pare.
 	 */
 	public static ContaCorrente operacoesContaCorrente(ContaCorrente conta, ContaPoupanca conta2, Scanner scanner,
-			int opcao) {
+			int opcao) throws Exception{
 		while (true) {
 			// Pegando a opção;
 			do {
